@@ -1,0 +1,59 @@
+:root {
+  --save-color: #16a085;
+  --reset-color: #7f8c8d;
+  --disabled-color: #999999;
+}
+
+.editor-controls {
+  width: 60%;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #bdc3c7;
+  margin-bottom: 40px;
+}
+
+.control__buttons button {
+  margin-left: 10px;
+  border-radius: 5px;
+  padding: 4px 12px;
+  text-transform: uppercase;
+}
+
+.control__buttons button:focus {
+  outline: none;
+}
+
+
+.control__buttons button.btn__save {
+  border: 1px solid var(--save-color);
+  color: var(--save-color);
+}
+
+.control__buttons button.btn__reset {
+  border: 1px solid var(--reset-color);
+  color: var(--reset-color);
+}
+
+.control__buttons button.btn__save:hover {
+  background: var(--save-color);
+}
+
+.control__buttons button.btn__reset:hover {
+  background: var(--reset-color);
+}
+
+.control__buttons button:hover {
+  color: #fff;
+  cursor: pointer;
+}
+
+.control__buttons button:disabled {
+  border: 1px solid var(--disabled-color);
+  color: var(--disabled-color);
+  cursor: not-allowed;
+}
+
+.control__buttons button:disabled:hover {
+    background: #fff;
+}

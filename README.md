@@ -21,7 +21,15 @@ it delegated the required `props` for the `ColorPicker`, `EditorControls` and `E
 
 #### Persistent State - `src/utils/localStorage.js`
 Achieved using `localStorage`.
+The api is for loading, saving and deleting a key from `localStorage`.
+Since the api is kept generic, a functionality in the `Editor/index` is responsible
+for converting the parsed `localStorage` object back to a `DOM` element using `React.createElement` API.
+See `createReactElements` function.
 
 #### Text highlighting - `src/utils/replaceString.js`
 The main functionality takes the initial string, the word to highlight and a callback
 function to apply when match is found.
+This is a generic implementation, giving the power to control what the replacer will do in the hands
+of the consumer.
+The `Editor/index` is the consumer and the `textReplacer` function is responsible for rendering
+the matched word wrapped in a `<span>` with an inline `background-color`.

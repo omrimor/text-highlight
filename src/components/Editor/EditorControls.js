@@ -1,7 +1,7 @@
 import React from 'react';
 import './EditorControls.css';
 
-export const EditorControls = ({ showMarkers, handleInputChange, isModifiedText, handleBtnChange, handleBtnReset }) => {
+export const EditorControls = ({ showMarkers, handleInputChange, isModifiedText, handleBtnChange, handleBtnReset, isSavedToLocalStorage }) => {
   return (
     <div className="editor-controls">
       <div className="control__toggle">
@@ -25,14 +25,14 @@ export const EditorControls = ({ showMarkers, handleInputChange, isModifiedText,
             handleBtnChange();
           }}
         >
-          save
+          {isSavedToLocalStorage ? <span aria-label="saved" role="img">👌</span> : <span aria-label="save" role="img">💾</span>}
         </button>
         <button
           className="btn__reset"
           onClick={() => {
             handleBtnReset();
           }}>
-          reset
+          <span aria-label="reset" role="img">⌛</span>
         </button>
       </div>
     </div>

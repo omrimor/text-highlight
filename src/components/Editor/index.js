@@ -1,6 +1,7 @@
 import React from 'react';
 import isObject from 'lodash/isObject';
 import isEmpty from 'lodash/isEmpty';
+import isEqual from 'lodash/isEqual';
 
 import ColorPicker from './ColorPicker';
 import { replaceString, saveState, loadState, deleteState } from '../../utils';
@@ -20,7 +21,8 @@ class Editor extends React.Component {
       displayColorPicker: false,
       xPos: '',
       yPos: '',
-      showMarkers: true
+      showMarkers: true,
+      isSavedToLocalStorage: false,
     };
   }
 
@@ -38,8 +40,14 @@ class Editor extends React.Component {
     this.setState({selectedWord: window.getSelection().toString()});
   };
 
+  setLocalStorageFlag = () => {
+    this.setState({isSavedToLocalStorage: isEqual(this.state.modifiedText, loadState())});
+  };
+
   setModifiedText = () => {
-    this.setState({modifiedText: replaceString(this.getText(), this.state.selectedWord, this.textReplacer)});
+    this.setState({modifiedText: replaceString(this.getText(), this.state.selectedWord, this.textReplacer)}, () => {
+      this.setLocalStorageFlag();
+    });
   };
 
   setSelectedColor = color => {
@@ -67,10 +75,11 @@ class Editor extends React.Component {
 
   handleBtnSave = () => {
     saveState(this.state.modifiedText);
+    this.setState({isSavedToLocalStorage: true})
   };
 
   handleBtnReset = () => {
-    this.setState({modifiedText: ''});
+    this.setState({modifiedText: '', isSavedToLocalStorage: false});
     deleteState();
   };
 
@@ -115,6 +124,7 @@ class Editor extends React.Component {
         />
         <EditorControls
           showMarkers={this.state.showMarkers}
+          isSavedToLocalStorage={this.state.isSavedToLocalStorage}
           isModifiedText={this.isModifiedText()}
           handleInputChange={(event) => {
             this.handleInputChange(event)

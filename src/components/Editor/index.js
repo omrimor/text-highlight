@@ -5,10 +5,11 @@ import isEqual from 'lodash/isEqual';
 
 import ColorPicker from './ColorPicker';
 import { replaceString, saveState, loadState, deleteState } from '../../utils';
-import './Editor.css';
 import EditorControls from './EditorControls';
 import EditorText from './EditorText';
 import textString from './textString';
+
+import './Editor.css';
 
 class Editor extends React.Component {
   constructor(props) {

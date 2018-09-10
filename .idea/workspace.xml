@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="93886bd0-3636-4928-90ed-b2f72479fe33" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Editor/EditorControls.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Editor/EditorControls.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Editor/EditorControls.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Editor/EditorControls.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Editor/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Editor/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/localStorage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/localStorage.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -53,7 +49,7 @@
         <counts>
           <entry key="css" value="420" />
           <entry key="html" value="1" />
-          <entry key="js" value="6960" />
+          <entry key="js" value="6964" />
           <entry key="md" value="1646" />
         </counts>
       </usages-collector>
@@ -61,7 +57,7 @@
         <counts>
           <entry key="CSS" value="420" />
           <entry key="HTML" value="1" />
-          <entry key="JavaScript" value="6929" />
+          <entry key="JavaScript" value="6933" />
           <entry key="PLAIN_TEXT" value="1646" />
           <entry key="Scratch" value="31" />
         </counts>
@@ -79,19 +75,19 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/Editor/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="157">
-              <caret line="107" column="53" lean-forward="true" selection-start-line="107" selection-start-column="10" selection-end-line="107" selection-end-column="53" />
+            <state relative-caret-position="-537">
+              <caret line="36" column="24" selection-start-line="36" selection-start-column="2" selection-end-line="36" selection-end-column="24" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Editor/EditorControls.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
+            <state relative-caret-position="918">
               <caret line="34" column="54" selection-start-line="34" selection-start-column="54" selection-end-line="34" selection-end-column="54" />
             </state>
           </provider>
@@ -154,7 +150,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>handleBtnReset</find>
       <find>map</find>
       <find>normalizeStateForReact</find>
       <find>EditorControls</find>
@@ -184,6 +179,7 @@
       <find>saveState</find>
       <find>handleBtnSave</find>
       <find>setModifiedText</find>
+      <find>xPos</find>
     </findStrings>
     <replaceStrings>
       <replace>KEY</replace>
@@ -210,8 +206,8 @@
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/utils/localStorage.js" />
         <option value="$PROJECT_DIR$/src/components/Editor/EditorControls.css" />
-        <option value="$PROJECT_DIR$/src/components/Editor/index.js" />
         <option value="$PROJECT_DIR$/src/components/Editor/EditorControls.js" />
+        <option value="$PROJECT_DIR$/src/components/Editor/index.js" />
       </list>
     </option>
   </component>
@@ -343,12 +339,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1536171012040</updated>
-      <workItem from="1536171013882" duration="75302000" />
+      <workItem from="1536171013882" duration="76009000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="75302000" />
+    <option name="totallyTimeSpent" value="76009000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="878" extended-state="6" />
@@ -360,7 +356,7 @@
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" />
-      <window_info active="true" anchor="bottom" id="Terminal" visible="true" weight="0.32372215" />
+      <window_info active="true" anchor="bottom" id="Terminal" visible="true" weight="0.1559633" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -480,17 +476,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Editor/index.js">
+    <entry file="file://$PROJECT_DIR$/src/components/Editor/EditorControls.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="107" column="53" lean-forward="true" selection-start-line="107" selection-start-column="10" selection-end-line="107" selection-end-column="53" />
+        <state relative-caret-position="918">
+          <caret line="34" column="54" selection-start-line="34" selection-start-column="54" selection-end-line="34" selection-end-column="54" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Editor/EditorControls.js">
+    <entry file="file://$PROJECT_DIR$/src/components/Editor/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="34" column="54" selection-start-line="34" selection-start-column="54" selection-end-line="34" selection-end-column="54" />
+        <state relative-caret-position="-537">
+          <caret line="36" column="24" selection-start-line="36" selection-start-column="2" selection-end-line="36" selection-end-column="24" />
         </state>
       </provider>
     </entry>

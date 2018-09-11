@@ -1,5 +1,9 @@
 const KEY = '__editorData';
 
+/**
+ * gets the value of a specific key in localStorage
+ * @returns {object}
+ */
 export const loadState = () => {
   try {
     const serializedState = localStorage.getItem(KEY);

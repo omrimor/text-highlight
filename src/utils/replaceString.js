@@ -4,6 +4,13 @@ import flatten from 'lodash/flatten';
 import isArray from 'lodash/isArray';
 import isObject from 'lodash/isObject';
 
+/**
+ *
+ * @param {string} str
+ * @param {regex|string} match
+ * @param {function} fn
+ * @returns {array}
+ */
 const replaceStringInner = (str, match, fn) => {
   if (str === '') {
     return str;

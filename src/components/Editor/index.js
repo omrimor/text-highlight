@@ -2,6 +2,7 @@ import React from 'react';
 import isObject from 'lodash/isObject';
 import isEmpty from 'lodash/isEmpty';
 import isEqual from 'lodash/isEqual';
+import { v4 } from 'uuid';
 
 import ColorPicker from './ColorPicker';
 import { replaceString, saveState, loadState, deleteState } from '../../utils';
@@ -89,12 +90,11 @@ class Editor extends React.Component {
     return showMarkers ? !this.isModifiedText() ? originalText : modifiedText : originalText
   };
 
-  textReplacer = (match, i) => {
-    return (
-      <span key={match + i} style={{ backgroundColor: this.state.selectedColor }}>
-        {match}
-      </span>
-    );
+  textReplacer = (match, isWhiteSpace = false) => {
+    const unique = v4();
+    return isWhiteSpace
+    ? <span key={`${match}_${unique}`}>{' '}</span>
+    : (<span key={`${match}_${unique}`} style={{ backgroundColor: this.state.selectedColor }}>{match}</span>)
   };
 
   isModifiedText = () => {

@@ -1,3 +1,4 @@
+import isRegExp from 'lodash/isRegExp';
 import escapeRegExp from 'lodash/escapeRegExp';
 import isString from 'lodash/isString';
 import flatten from 'lodash/flatten';
@@ -18,13 +19,27 @@ const replaceStringInner = (str, match, fn) => {
     throw new TypeError('First argument to must be a string');
   }
 
-  const re = new RegExp('(' + escapeRegExp(match) + ')', 'gi');
-  const result = str.split(re);
+  let re = match;
 
-  // Apply fn to all odd elements based on str.split
-  for (let i = 1; i < result.length; i += 2) {
-    result[i] = fn(result[i], i);
+  if (!isRegExp(re)) {
+    re = new RegExp('(' + escapeRegExp(re) + ')', 'gi');
   }
+
+  let result = str.split(re);
+
+  for (let i = 0; i < result.length; i ++) {
+    // Check even numbers for whitespace before and after
+    // matched to apply fn and render a React element with whitespace
+    if(i % 2 === 0) {
+      if(result[i] === ' ') {
+        result[i] = fn(result[i], true);
+      }
+      // Apply fn to all odd elements
+    } else {
+      result[i] = fn(result[i]);
+    }
+  }
+
   return result;
 };
 

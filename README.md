@@ -27,9 +27,8 @@ for converting the parsed `localStorage` object back to a `DOM` element using `R
 See `createReactElements` function.
 
 #### Text highlighting - `src/utils/replaceString.js`
-The main functionality takes the initial string, the word to highlight and a callback
-function to apply when match is found.
-This is a generic implementation, giving the power to control what the replacer will do in the hands
-of the consumer.
-The `Editor/index` is the consumer and the `textReplacer` function is responsible for rendering
-the matched word wrapped in a `<span>` with an inline `background-color`.
+The main functionality takes an input, matched string to look for, the selected color and the index location
+of the matched string.<br />
+It determines if the match exist, if so has it been changed before and passes unmatched items.
+the result is an array of strings with the matched strings as objects in that array.<br />
+The main container, `Editor/index.js` takes the new array and parses the object to React elements.

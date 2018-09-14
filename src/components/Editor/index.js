@@ -5,7 +5,7 @@ import isEqual from 'lodash/isEqual';
 import { v4 } from 'uuid';
 
 import ColorPicker from './ColorPicker';
-import { replaceString, saveState, loadState, deleteState } from '../../utils';
+import { saveState, loadState, deleteState, replaceMatchChars } from '../../utils';
 import EditorControls from './EditorControls';
 import EditorText from './EditorText';
 import textString from './textString';
@@ -19,35 +19,41 @@ class Editor extends React.Component {
       originalText: textString,
       selectedWord: '',
       selectedColor: '#fff',
-      modifiedText: this.normalizeStateForReact(loadState()),
+      textAsArray: this.handleLocalStorageLoading(loadState()),
       displayColorPicker: false,
       xPos: '',
       yPos: '',
       showMarkers: true,
       isSavedToLocalStorage: false,
+      startIndexAt: 0,
     };
   }
 
-  createReactElements = childArray =>
-    childArray.map(child =>
-      isObject(child)
-        ? React.createElement(child.type, {...child.props, key: child.key}, child.props.children)
-        : child
-    );
-
-  normalizeStateForReact = data =>
-    isEmpty(data) ? '' : this.createReactElements(data);
+  handleLocalStorageLoading = data =>
+    isEmpty(data) ? [] : data;
 
   setSelectedWord = () => {
-    this.setState({selectedWord: window.getSelection().toString()});
+    this.setState({
+      selectedWord: window.getSelection().toString(),
+    });
+  };
+
+  setSelectedStartIndex = () => {
+    const selection = window.getSelection();
+    this.setState({
+      startIndexAt: selection.anchorOffset,
+    });
   };
 
   setLocalStorageFlag = () => {
-    this.setState({isSavedToLocalStorage: isEqual(this.state.modifiedText, loadState())});
+    const { textAsArray } = this.state;
+    this.setState({isSavedToLocalStorage: isEqual(textAsArray, loadState())});
   };
 
   setModifiedText = () => {
-    this.setState({modifiedText: replaceString(this.getText(), this.state.selectedWord, this.textReplacer)}, () => {
+    const { selectedWord, selectedColor, startIndexAt } = this.state;
+    const textAsArray = replaceMatchChars(this.getText(), selectedWord, selectedColor, startIndexAt);
+    this.setState({ textAsArray }, () => {
       this.setLocalStorageFlag();
     });
   };
@@ -76,32 +82,49 @@ class Editor extends React.Component {
   };
 
   handleBtnSave = () => {
-    saveState(this.state.modifiedText);
+    saveState(this.state.textAsArray);
     this.setState({isSavedToLocalStorage: true})
   };
 
   handleBtnReset = () => {
-    this.setState({modifiedText: '', isSavedToLocalStorage: false});
+    this.setState({
+      textAsArray: '',
+      isSavedToLocalStorage: false,
+    });
     deleteState();
   };
 
   getText = () => {
-    const { originalText, modifiedText, showMarkers } = this.state;
-    return showMarkers ? !this.isModifiedText() ? originalText : modifiedText : originalText
+    const { originalText, textAsArray, showMarkers } = this.state;
+    return showMarkers ? !this.isTextAsArray() ? originalText : textAsArray : originalText
   };
 
-  textReplacer = (match, isWhiteSpace = false) => {
-    const unique = v4();
-    return isWhiteSpace
-    ? <span key={`${match}_${unique}`}>{' '}</span>
-    : (<span key={`${match}_${unique}`} style={{ backgroundColor: this.state.selectedColor }}>{match}</span>)
+  renderText = () => {
+    const { originalText, textAsArray } = this.state;
+    return !this.isTextAsArray() ? originalText : this.mapperForReactElements(textAsArray);
   };
 
-  isModifiedText = () => {
-    return this.state.modifiedText !== '';
+  mapperForReactElements = src =>
+    src.map(child =>
+      isObject(child)
+        ? React.createElement('span', {style: {backgroundColor: child.color}, key: child.indexAt + v4()}, child.match)
+        : child
+    );
+
+  isTextAsArray = () => {
+    return this.state.textAsArray.length > 0;
   };
 
   render() {
+    const {
+      displayColorPicker,
+      selectedColor,
+      xPos,
+      yPos,
+      showMarkers,
+      isSavedToLocalStorage,
+      originalText
+    } = this.state;
     return (
       <div className="container">
         <div className="intro">
@@ -109,9 +132,9 @@ class Editor extends React.Component {
           <span aria-label="clap" role="img">👏</span>
         </div>
         <ColorPicker
-          displayColorPicker={this.state.displayColorPicker}
-          selectedColor={this.state.selectedColor}
-          mousePos={{x:this.state.xPos, y: this.state.yPos}}
+          displayColorPicker={displayColorPicker}
+          selectedColor={selectedColor}
+          mousePos={{x: xPos, y: yPos}}
           handlePickerClose={() => {
             this.handlePickerClose();
           }}
@@ -124,9 +147,9 @@ class Editor extends React.Component {
           }}
         />
         <EditorControls
-          showMarkers={this.state.showMarkers}
-          isSavedToLocalStorage={this.state.isSavedToLocalStorage}
-          isModifiedText={this.isModifiedText()}
+          showMarkers={showMarkers}
+          isSavedToLocalStorage={isSavedToLocalStorage}
+          isModifiedText={this.isTextAsArray()}
           handleInputChange={(event) => {
             this.handleInputChange(event)
           }}
@@ -141,11 +164,12 @@ class Editor extends React.Component {
           handleMouseUp={() => {
             this.handlePickerOpen();
             this.setSelectedWord();
+            this.setSelectedStartIndex();
           }}
           handleMouseMove={event => {
             this.setMouseCords(event);
           }}
-          displayText={this.getText()}
+          displayText={showMarkers ? this.renderText() : originalText}
         />
       </div>
     );

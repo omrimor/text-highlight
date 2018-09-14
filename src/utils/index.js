@@ -1,9 +1,9 @@
 import { loadState, saveState, deleteState } from './localStorage';
-import { replaceString } from './replaceString';
+import { replaceMatchChars } from './replaceString';
 
 export {
   loadState,
   saveState,
   deleteState,
-  replaceString,
+  replaceMatchChars,
 };
